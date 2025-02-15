@@ -1,0 +1,79 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Vista\\AdministracionForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Vista\\AdministracionForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Controlador\\ExportadorXML.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controlador\\ExportadorXML.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Controlador\\GestionReservas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controlador\\GestionReservas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdministracionForm.cs",
+              "DocumentMoniker": "C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Vista\\AdministracionForm.cs",
+              "RelativeDocumentMoniker": "Vista\\AdministracionForm.cs",
+              "ToolTip": "C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Vista\\AdministracionForm.cs",
+              "RelativeToolTip": "Vista\\AdministracionForm.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T15:31:17.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GestionReservas.cs",
+              "DocumentMoniker": "C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Controlador\\GestionReservas.cs",
+              "RelativeDocumentMoniker": "Controlador\\GestionReservas.cs",
+              "ToolTip": "C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Controlador\\GestionReservas.cs",
+              "RelativeToolTip": "Controlador\\GestionReservas.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T15:30:22.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExportadorXML.cs",
+              "DocumentMoniker": "C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Controlador\\ExportadorXML.cs",
+              "RelativeDocumentMoniker": "Controlador\\ExportadorXML.cs",
+              "ToolTip": "C:\\Users\\MarinaPC\\Downloads\\GENTEFIT_YAFURRULA\\ProyectoGenteFit\\Controlador\\ExportadorXML.cs",
+              "RelativeToolTip": "Controlador\\ExportadorXML.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T15:29:44.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

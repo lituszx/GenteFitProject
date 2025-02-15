@@ -1,0 +1,955 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GenteFitCristinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actividad">
+          <Key>
+            <PropertyRef Name="ActividadID" />
+          </Key>
+          <Property Name="ActividadID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="text" />
+          <Property Name="Intensidad" Type="varchar" MaxLength="20" />
+          <Property Name="PlazasTotales" Type="int" Nullable="false" />
+          <Property Name="Horario" Type="datetime" Nullable="false" />
+          <Property Name="SalaID" Type="int" />
+          <Property Name="MonitorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="UsuarioID" Type="int" />
+        </EntityType>
+        <EntityType Name="ListaEspera">
+          <Key>
+            <PropertyRef Name="ListaEsperaID" />
+          </Key>
+          <Property Name="ListaEsperaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Posicion" Type="int" Nullable="false" />
+          <Property Name="ClienteID" Type="int" />
+          <Property Name="ActividadID" Type="int" />
+        </EntityType>
+        <EntityType Name="Monitor">
+          <Key>
+            <PropertyRef Name="MonitorID" />
+          </Key>
+          <Property Name="MonitorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioID" Type="int" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="ReservaID" />
+          </Key>
+          <Property Name="ReservaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaReserva" Type="datetime" Nullable="false" />
+          <Property Name="EstadoReserva" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ClienteID" Type="int" />
+          <Property Name="ActividadID" Type="int" />
+        </EntityType>
+        <EntityType Name="Sala">
+          <Key>
+            <PropertyRef Name="SalaID" />
+          </Key>
+          <Property Name="SalaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Actividad__Monit__440B1D61">
+          <End Role="Monitor" Type="Self.Monitor" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monitor">
+              <PropertyRef Name="MonitorID" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="MonitorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actividad__SalaI__4316F928">
+          <End Role="Sala" Type="Self.Sala" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sala">
+              <PropertyRef Name="SalaID" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="SalaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente__Usuario__3D5E1FD2">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaEspe__Activ__4CA06362">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="ListaEspera" Type="Self.ListaEspera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="ActividadID" />
+            </Principal>
+            <Dependent Role="ListaEspera">
+              <PropertyRef Name="ActividadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaEspe__Clien__4BAC3F29">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="ListaEspera" Type="Self.ListaEspera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ListaEspera">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Monitor__Usuario__3A81B327">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Monitor" Type="Self.Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__Activid__48CFD27E">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="ActividadID" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ActividadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__Cliente__47DBAE45">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_DeleteActividad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActividadID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClienteID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteListaEspera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ListaEsperaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteMonitor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MonitorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReservaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteSala" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SalaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetActividades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetListaEsperaByActividad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActividadID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetMonitores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetReservas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetSalas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_InsertActividad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="text" Mode="In" />
+          <Parameter Name="Intensidad" Type="varchar" Mode="In" />
+          <Parameter Name="PlazasTotales" Type="int" Mode="In" />
+          <Parameter Name="Horario" Type="datetime" Mode="In" />
+          <Parameter Name="SalaID" Type="int" Mode="In" />
+          <Parameter Name="MonitorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertListaEspera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Posicion" Type="int" Mode="In" />
+          <Parameter Name="ClienteID" Type="int" Mode="In" />
+          <Parameter Name="ActividadID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertMonitor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FechaReserva" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoReserva" Type="varchar" Mode="In" />
+          <Parameter Name="ClienteID" Type="int" Mode="In" />
+          <Parameter Name="ActividadID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertSala" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Capacidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="varchar" Mode="In" />
+          <Parameter Name="Rol" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateActividad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActividadID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="text" Mode="In" />
+          <Parameter Name="Intensidad" Type="varchar" Mode="In" />
+          <Parameter Name="PlazasTotales" Type="int" Mode="In" />
+          <Parameter Name="Horario" Type="datetime" Mode="In" />
+          <Parameter Name="SalaID" Type="int" Mode="In" />
+          <Parameter Name="MonitorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClienteID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateListaEsperaPosicion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ListaEsperaID" Type="int" Mode="In" />
+          <Parameter Name="Posicion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateMonitor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MonitorID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReservaID" Type="int" Mode="In" />
+          <Parameter Name="FechaReserva" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoReserva" Type="varchar" Mode="In" />
+          <Parameter Name="ClienteID" Type="int" Mode="In" />
+          <Parameter Name="ActividadID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateSala" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SalaID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Capacidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="varchar" Mode="In" />
+          <Parameter Name="Rol" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="GenteFitCristinaModelStoreContainer">
+          <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaEspera" EntityType="Self.ListaEspera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monitor" EntityType="Self.Monitor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sala" EntityType="Self.Sala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Actividad__Monit__440B1D61" Association="Self.FK__Actividad__Monit__440B1D61">
+            <End Role="Monitor" EntitySet="Monitor" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actividad__SalaI__4316F928" Association="Self.FK__Actividad__SalaI__4316F928">
+            <End Role="Sala" EntitySet="Sala" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente__Usuario__3D5E1FD2" Association="Self.FK__Cliente__Usuario__3D5E1FD2">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaEspe__Activ__4CA06362" Association="Self.FK__ListaEspe__Activ__4CA06362">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="ListaEspera" EntitySet="ListaEspera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaEspe__Clien__4BAC3F29" Association="Self.FK__ListaEspe__Clien__4BAC3F29">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ListaEspera" EntitySet="ListaEspera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Monitor__Usuario__3A81B327" Association="Self.FK__Monitor__Usuario__3A81B327">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Monitor" EntitySet="Monitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__Activid__48CFD27E" Association="Self.FK__Reserva__Activid__48CFD27E">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__Cliente__47DBAE45" Association="Self.FK__Reserva__Cliente__47DBAE45">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GenteFitCristinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actividad">
+          <Key>
+            <PropertyRef Name="ActividadID" />
+          </Key>
+          <Property Name="ActividadID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Intensidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PlazasTotales" Type="Int32" Nullable="false" />
+          <Property Name="Horario" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SalaID" Type="Int32" />
+          <Property Name="MonitorID" Type="Int32" />
+          <NavigationProperty Name="Monitor" Relationship="Self.FK__Actividad__Monit__440B1D61" FromRole="Actividad" ToRole="Monitor" />
+          <NavigationProperty Name="Sala" Relationship="Self.FK__Actividad__SalaI__4316F928" FromRole="Actividad" ToRole="Sala" />
+          <NavigationProperty Name="ListaEspera" Relationship="Self.FK__ListaEspe__Activ__4CA06362" FromRole="Actividad" ToRole="ListaEspera" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Activid__48CFD27E" FromRole="Actividad" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Cliente__Usuario__3D5E1FD2" FromRole="Cliente" ToRole="Usuario" />
+          <NavigationProperty Name="ListaEspera" Relationship="Self.FK__ListaEspe__Clien__4BAC3F29" FromRole="Cliente" ToRole="ListaEspera" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Cliente__47DBAE45" FromRole="Cliente" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="ListaEspera">
+          <Key>
+            <PropertyRef Name="ListaEsperaID" />
+          </Key>
+          <Property Name="ListaEsperaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Posicion" Type="Int32" Nullable="false" />
+          <Property Name="ClienteID" Type="Int32" />
+          <Property Name="ActividadID" Type="Int32" />
+          <NavigationProperty Name="Actividad" Relationship="Self.FK__ListaEspe__Activ__4CA06362" FromRole="ListaEspera" ToRole="Actividad" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__ListaEspe__Clien__4BAC3F29" FromRole="ListaEspera" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Monitor">
+          <Key>
+            <PropertyRef Name="MonitorID" />
+          </Key>
+          <Property Name="MonitorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <NavigationProperty Name="Actividad" Relationship="Self.FK__Actividad__Monit__440B1D61" FromRole="Monitor" ToRole="Actividad" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Monitor__Usuario__3A81B327" FromRole="Monitor" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="ReservaID" />
+          </Key>
+          <Property Name="ReservaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaReserva" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstadoReserva" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClienteID" Type="Int32" />
+          <Property Name="ActividadID" Type="Int32" />
+          <NavigationProperty Name="Actividad" Relationship="Self.FK__Reserva__Activid__48CFD27E" FromRole="Reserva" ToRole="Actividad" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Reserva__Cliente__47DBAE45" FromRole="Reserva" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Sala">
+          <Key>
+            <PropertyRef Name="SalaID" />
+          </Key>
+          <Property Name="SalaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actividad" Relationship="Self.FK__Actividad__SalaI__4316F928" FromRole="Sala" ToRole="Actividad" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Cliente__Usuario__3D5E1FD2" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="Monitor" Relationship="Self.FK__Monitor__Usuario__3A81B327" FromRole="Usuario" ToRole="Monitor" />
+        </EntityType>
+        <Association Name="FK__Actividad__Monit__440B1D61">
+          <End Role="Monitor" Type="Self.Monitor" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monitor">
+              <PropertyRef Name="MonitorID" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="MonitorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actividad__SalaI__4316F928">
+          <End Role="Sala" Type="Self.Sala" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sala">
+              <PropertyRef Name="SalaID" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="SalaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaEspe__Activ__4CA06362">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="ListaEspera" Type="Self.ListaEspera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="ActividadID" />
+            </Principal>
+            <Dependent Role="ListaEspera">
+              <PropertyRef Name="ActividadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__Activid__48CFD27E">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="ActividadID" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ActividadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente__Usuario__3D5E1FD2">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaEspe__Clien__4BAC3F29">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="ListaEspera" Type="Self.ListaEspera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ListaEspera">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__Cliente__47DBAE45">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Monitor__Usuario__3A81B327">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Monitor" Type="Self.Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GenteFitCristinaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actividad" EntityType="Self.Actividad" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="ListaEspera" EntityType="Self.ListaEspera" />
+          <EntitySet Name="Monitor" EntityType="Self.Monitor" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" />
+          <EntitySet Name="Sala" EntityType="Self.Sala" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Actividad__Monit__440B1D61" Association="Self.FK__Actividad__Monit__440B1D61">
+            <End Role="Monitor" EntitySet="Monitor" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actividad__SalaI__4316F928" Association="Self.FK__Actividad__SalaI__4316F928">
+            <End Role="Sala" EntitySet="Sala" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaEspe__Activ__4CA06362" Association="Self.FK__ListaEspe__Activ__4CA06362">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="ListaEspera" EntitySet="ListaEspera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__Activid__48CFD27E" Association="Self.FK__Reserva__Activid__48CFD27E">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente__Usuario__3D5E1FD2" Association="Self.FK__Cliente__Usuario__3D5E1FD2">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaEspe__Clien__4BAC3F29" Association="Self.FK__ListaEspe__Clien__4BAC3F29">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ListaEspera" EntitySet="ListaEspera" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__Cliente__47DBAE45" Association="Self.FK__Reserva__Cliente__47DBAE45">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Monitor__Usuario__3A81B327" Association="Self.FK__Monitor__Usuario__3A81B327">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Monitor" EntitySet="Monitor" />
+          </AssociationSet>
+          <FunctionImport Name="sp_DeleteActividad">
+            <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteCliente">
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteListaEspera">
+            <Parameter Name="ListaEsperaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteMonitor">
+            <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteReserva">
+            <Parameter Name="ReservaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteSala">
+            <Parameter Name="SalaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteUsuario">
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetActividades" ReturnType="Collection(GenteFitCristinaModel.sp_GetActividades_Result)" />
+          <FunctionImport Name="sp_GetClientes" ReturnType="Collection(GenteFitCristinaModel.sp_GetClientes_Result)" />
+          <FunctionImport Name="sp_GetListaEsperaByActividad" ReturnType="Collection(GenteFitCristinaModel.sp_GetListaEsperaByActividad_Result)">
+            <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetMonitores" ReturnType="Collection(GenteFitCristinaModel.sp_GetMonitores_Result)" />
+          <FunctionImport Name="sp_GetReservas" ReturnType="Collection(GenteFitCristinaModel.sp_GetReservas_Result)" />
+          <FunctionImport Name="sp_GetSalas" ReturnType="Collection(GenteFitCristinaModel.sp_GetSalas_Result)" />
+          <FunctionImport Name="sp_GetUsuarios" ReturnType="Collection(GenteFitCristinaModel.sp_GetUsuarios_Result)" />
+          <FunctionImport Name="sp_InsertActividad">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Intensidad" Mode="In" Type="String" />
+            <Parameter Name="PlazasTotales" Mode="In" Type="Int32" />
+            <Parameter Name="Horario" Mode="In" Type="DateTime" />
+            <Parameter Name="SalaID" Mode="In" Type="Int32" />
+            <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertCliente">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertListaEspera">
+            <Parameter Name="Posicion" Mode="In" Type="Int32" />
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+            <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertMonitor">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertReserva">
+            <Parameter Name="FechaReserva" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoReserva" Mode="In" Type="String" />
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+            <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertSala">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Capacidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertUsuario">
+            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Rol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateActividad">
+            <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Intensidad" Mode="In" Type="String" />
+            <Parameter Name="PlazasTotales" Mode="In" Type="Int32" />
+            <Parameter Name="Horario" Mode="In" Type="DateTime" />
+            <Parameter Name="SalaID" Mode="In" Type="Int32" />
+            <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateCliente">
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateListaEsperaPosicion">
+            <Parameter Name="ListaEsperaID" Mode="In" Type="Int32" />
+            <Parameter Name="Posicion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateMonitor">
+            <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateReserva">
+            <Parameter Name="ReservaID" Mode="In" Type="Int32" />
+            <Parameter Name="FechaReserva" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoReserva" Mode="In" Type="String" />
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+            <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateSala">
+            <Parameter Name="SalaID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Capacidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateUsuario">
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Rol" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_GetActividades_Result">
+          <Property Type="Int32" Name="ActividadID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Intensidad" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="PlazasTotales" Nullable="false" />
+          <Property Type="DateTime" Name="Horario" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="SalaID" Nullable="true" />
+          <Property Type="Int32" Name="MonitorID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetClientes_Result">
+          <Property Type="Int32" Name="ClienteID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetListaEsperaByActividad_Result">
+          <Property Type="Int32" Name="ListaEsperaID" Nullable="false" />
+          <Property Type="Int32" Name="Posicion" Nullable="false" />
+          <Property Type="Int32" Name="ClienteID" Nullable="true" />
+          <Property Type="Int32" Name="ActividadID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetMonitores_Result">
+          <Property Type="Int32" Name="MonitorID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReservas_Result">
+          <Property Type="Int32" Name="ReservaID" Nullable="false" />
+          <Property Type="DateTime" Name="FechaReserva" Nullable="false" Precision="23" />
+          <Property Type="String" Name="EstadoReserva" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="ClienteID" Nullable="true" />
+          <Property Type="Int32" Name="ActividadID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetSalas_Result">
+          <Property Type="Int32" Name="SalaID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Capacidad" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetUsuarios_Result">
+          <Property Type="Int32" Name="UsuarioID" Nullable="false" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Contraseña" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Rol" Nullable="false" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GenteFitCristinaModelStoreContainer" CdmEntityContainer="GenteFitCristinaEntities1">
+          <EntitySetMapping Name="Actividad">
+            <EntityTypeMapping TypeName="GenteFitCristinaModel.Actividad">
+              <MappingFragment StoreEntitySet="Actividad">
+                <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Intensidad" ColumnName="Intensidad" />
+                <ScalarProperty Name="PlazasTotales" ColumnName="PlazasTotales" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+                <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="GenteFitCristinaModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaEspera">
+            <EntityTypeMapping TypeName="GenteFitCristinaModel.ListaEspera">
+              <MappingFragment StoreEntitySet="ListaEspera">
+                <ScalarProperty Name="ListaEsperaID" ColumnName="ListaEsperaID" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monitor">
+            <EntityTypeMapping TypeName="GenteFitCristinaModel.Monitor">
+              <MappingFragment StoreEntitySet="Monitor">
+                <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserva">
+            <EntityTypeMapping TypeName="GenteFitCristinaModel.Reserva">
+              <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+                <ScalarProperty Name="FechaReserva" ColumnName="FechaReserva" />
+                <ScalarProperty Name="EstadoReserva" ColumnName="EstadoReserva" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sala">
+            <EntityTypeMapping TypeName="GenteFitCristinaModel.Sala">
+              <MappingFragment StoreEntitySet="Sala">
+                <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="GenteFitCristinaModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_DeleteActividad" FunctionName="GenteFitCristinaModel.Store.sp_DeleteActividad" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteCliente" FunctionName="GenteFitCristinaModel.Store.sp_DeleteCliente" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteListaEspera" FunctionName="GenteFitCristinaModel.Store.sp_DeleteListaEspera" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteMonitor" FunctionName="GenteFitCristinaModel.Store.sp_DeleteMonitor" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteReserva" FunctionName="GenteFitCristinaModel.Store.sp_DeleteReserva" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteSala" FunctionName="GenteFitCristinaModel.Store.sp_DeleteSala" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteUsuario" FunctionName="GenteFitCristinaModel.Store.sp_DeleteUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_GetActividades" FunctionName="GenteFitCristinaModel.Store.sp_GetActividades">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetActividades_Result">
+                <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Intensidad" ColumnName="Intensidad" />
+                <ScalarProperty Name="PlazasTotales" ColumnName="PlazasTotales" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+                <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetClientes" FunctionName="GenteFitCristinaModel.Store.sp_GetClientes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetClientes_Result">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetListaEsperaByActividad" FunctionName="GenteFitCristinaModel.Store.sp_GetListaEsperaByActividad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetListaEsperaByActividad_Result">
+                <ScalarProperty Name="ListaEsperaID" ColumnName="ListaEsperaID" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetMonitores" FunctionName="GenteFitCristinaModel.Store.sp_GetMonitores">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetMonitores_Result">
+                <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReservas" FunctionName="GenteFitCristinaModel.Store.sp_GetReservas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetReservas_Result">
+                <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+                <ScalarProperty Name="FechaReserva" ColumnName="FechaReserva" />
+                <ScalarProperty Name="EstadoReserva" ColumnName="EstadoReserva" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSalas" FunctionName="GenteFitCristinaModel.Store.sp_GetSalas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetSalas_Result">
+                <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetUsuarios" FunctionName="GenteFitCristinaModel.Store.sp_GetUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetUsuarios_Result">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsertActividad" FunctionName="GenteFitCristinaModel.Store.sp_InsertActividad" />
+          <FunctionImportMapping FunctionImportName="sp_InsertCliente" FunctionName="GenteFitCristinaModel.Store.sp_InsertCliente" />
+          <FunctionImportMapping FunctionImportName="sp_InsertListaEspera" FunctionName="GenteFitCristinaModel.Store.sp_InsertListaEspera" />
+          <FunctionImportMapping FunctionImportName="sp_InsertMonitor" FunctionName="GenteFitCristinaModel.Store.sp_InsertMonitor" />
+          <FunctionImportMapping FunctionImportName="sp_InsertReserva" FunctionName="GenteFitCristinaModel.Store.sp_InsertReserva" />
+          <FunctionImportMapping FunctionImportName="sp_InsertSala" FunctionName="GenteFitCristinaModel.Store.sp_InsertSala" />
+          <FunctionImportMapping FunctionImportName="sp_InsertUsuario" FunctionName="GenteFitCristinaModel.Store.sp_InsertUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateActividad" FunctionName="GenteFitCristinaModel.Store.sp_UpdateActividad" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateCliente" FunctionName="GenteFitCristinaModel.Store.sp_UpdateCliente" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateListaEsperaPosicion" FunctionName="GenteFitCristinaModel.Store.sp_UpdateListaEsperaPosicion" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateMonitor" FunctionName="GenteFitCristinaModel.Store.sp_UpdateMonitor" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateReserva" FunctionName="GenteFitCristinaModel.Store.sp_UpdateReserva" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateSala" FunctionName="GenteFitCristinaModel.Store.sp_UpdateSala" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateUsuario" FunctionName="GenteFitCristinaModel.Store.sp_UpdateUsuario" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

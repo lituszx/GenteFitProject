@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- root -->
+  <xs:element name="GenteFitData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Usuarios" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+			
+				<xs:element name="Usuarios" minOccurs="0">
+				  <xs:complexType>
+					<xs:sequence>
+					  <xs:element name="Usuario" maxOccurs="unbounded">
+						<xs:complexType>
+						  <xs:all>
+							<xs:element name="UsuarioID" type="xs:int"/>
+							<xs:element name="NombreUsuario" type="xs:string"/>
+							<xs:element name="Contraseña" type="xs:string" minOccurs="0"/>
+							<xs:element name="Rol" type="xs:string"/>
+						  </xs:all>
+						</xs:complexType>
+					  </xs:element>
+					</xs:sequence>
+				  </xs:complexType>
+				</xs:element>
+			  </xs:sequence>
+			</xs:complexType>
+		  </xs:element>
+        
+		<xs:element name="Clientes" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Cliente" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="ClienteID" type="xs:int"/>
+                    <xs:element name="Nombre" type="xs:string"/>
+                    <xs:element name="Apellidos" type="xs:string"/>
+                    <xs:element name="Correo" type="xs:string"/>
+                    <xs:element name="Telefono" type="xs:string" minOccurs="0"/>
+                    <xs:element name="FechaNacimiento" type="xs:date" minOccurs="0"/>
+                    <xs:element name="Direccion" type="xs:string" minOccurs="0"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="Actividades" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Actividad" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="ActividadID" type="xs:int"/>
+                    <xs:element name="Nombre" type="xs:string"/>
+                    <xs:element name="Descripcion" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Intensidad" type="xs:string" minOccurs="0"/>
+                    <xs:element name="PlazasTotales" type="xs:int"/>
+                    <xs:element name="Horario" type="xs:dateTime"/>
+                    <xs:element name="SalaID" type="xs:int"/>
+                    <xs:element name="MonitorID" type="xs:int"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="Reservas" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Reserva" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="ReservaID" type="xs:int"/>
+                    <xs:element name="FechaReserva" type="xs:dateTime"/>
+                    <xs:element name="EstadoReserva" type="xs:string"/>
+                    <xs:element name="ClienteID" type="xs:int"/>
+                    <xs:element name="ActividadID" type="xs:int"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="Monitores" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Monitor" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="MonitorID" type="xs:int"/>
+                    <xs:element name="Nombre" type="xs:string"/>
+                    <xs:element name="Apellidos" type="xs:string"/>
+                    <xs:element name="Telefono" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Correo" type="xs:string" minOccurs="0"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="Salas" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Sala" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="SalaID" type="xs:int"/>
+                    <xs:element name="Nombre" type="xs:string"/>
+                    <xs:element name="Capacidad" type="xs:int"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

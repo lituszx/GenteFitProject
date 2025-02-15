@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GenteFitCristinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Actividad">
+    <Key>
+      <PropertyRef Name="ActividadID" />
+    </Key>
+    <Property Name="ActividadID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Intensidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PlazasTotales" Type="Int32" Nullable="false" />
+    <Property Name="Horario" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SalaID" Type="Int32" />
+    <Property Name="MonitorID" Type="Int32" />
+    <NavigationProperty Name="Monitor" Relationship="Self.FK__Actividad__Monit__300424B4" FromRole="Actividad" ToRole="Monitor" />
+    <NavigationProperty Name="Sala" Relationship="Self.FK__Actividad__SalaI__2F10007B" FromRole="Actividad" ToRole="Sala" />
+    <NavigationProperty Name="ListaEspera" Relationship="Self.FK__ListaEspe__Activ__38996AB5" FromRole="Actividad" ToRole="ListaEspera" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Activid__34C8D9D1" FromRole="Actividad" ToRole="Reserva" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="ClienteID" />
+    </Key>
+    <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+    <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="UsuarioID" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Cliente__Usuario__29572725" FromRole="Cliente" ToRole="Usuario" />
+    <NavigationProperty Name="ListaEspera" Relationship="Self.FK__ListaEspe__Clien__37A5467C" FromRole="Cliente" ToRole="ListaEspera" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Cliente__33D4B598" FromRole="Cliente" ToRole="Reserva" />
+  </EntityType>
+  <EntityType Name="ListaEspera">
+    <Key>
+      <PropertyRef Name="ListaEsperaID" />
+    </Key>
+    <Property Name="ListaEsperaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Posicion" Type="Int32" Nullable="false" />
+    <Property Name="ClienteID" Type="Int32" />
+    <Property Name="ActividadID" Type="Int32" />
+    <NavigationProperty Name="Actividad" Relationship="Self.FK__ListaEspe__Activ__38996AB5" FromRole="ListaEspera" ToRole="Actividad" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK__ListaEspe__Clien__37A5467C" FromRole="ListaEspera" ToRole="Cliente" />
+  </EntityType>
+  <EntityType Name="Monitor">
+    <Key>
+      <PropertyRef Name="MonitorID" />
+    </Key>
+    <Property Name="MonitorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Actividad" Relationship="Self.FK__Actividad__Monit__300424B4" FromRole="Monitor" ToRole="Actividad" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Monitor__Usuario__267ABA7A" FromRole="Monitor" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="ReservaID" />
+    </Key>
+    <Property Name="ReservaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaReserva" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EstadoReserva" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClienteID" Type="Int32" />
+    <Property Name="ActividadID" Type="Int32" />
+    <NavigationProperty Name="Actividad" Relationship="Self.FK__Reserva__Activid__34C8D9D1" FromRole="Reserva" ToRole="Actividad" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK__Reserva__Cliente__33D4B598" FromRole="Reserva" ToRole="Cliente" />
+  </EntityType>
+  <EntityType Name="Sala">
+    <Key>
+      <PropertyRef Name="SalaID" />
+    </Key>
+    <Property Name="SalaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Capacidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Actividad" Relationship="Self.FK__Actividad__SalaI__2F10007B" FromRole="Sala" ToRole="Actividad" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK__Cliente__Usuario__29572725" FromRole="Usuario" ToRole="Cliente" />
+    <NavigationProperty Name="Monitor" Relationship="Self.FK__Monitor__Usuario__267ABA7A" FromRole="Usuario" ToRole="Monitor" />
+  </EntityType>
+  <Association Name="FK__Actividad__Monit__300424B4">
+    <End Role="Monitor" Type="Self.Monitor" Multiplicity="0..1" />
+    <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monitor">
+        <PropertyRef Name="MonitorID" />
+      </Principal>
+      <Dependent Role="Actividad">
+        <PropertyRef Name="MonitorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Actividad__SalaI__2F10007B">
+    <End Role="Sala" Type="Self.Sala" Multiplicity="0..1" />
+    <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sala">
+        <PropertyRef Name="SalaID" />
+      </Principal>
+      <Dependent Role="Actividad">
+        <PropertyRef Name="SalaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ListaEspe__Activ__38996AB5">
+    <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+    <End Role="ListaEspera" Type="Self.ListaEspera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actividad">
+        <PropertyRef Name="ActividadID" />
+      </Principal>
+      <Dependent Role="ListaEspera">
+        <PropertyRef Name="ActividadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__Activid__34C8D9D1">
+    <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actividad">
+        <PropertyRef Name="ActividadID" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="ActividadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cliente__Usuario__29572725">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ListaEspe__Clien__37A5467C">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="ListaEspera" Type="Self.ListaEspera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="ClienteID" />
+      </Principal>
+      <Dependent Role="ListaEspera">
+        <PropertyRef Name="ClienteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__Cliente__33D4B598">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="ClienteID" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="ClienteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Monitor__Usuario__267ABA7A">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Monitor" Type="Self.Monitor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Monitor">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GenteFitCristinaEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actividad" EntityType="Self.Actividad" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="ListaEspera" EntityType="Self.ListaEspera" />
+    <EntitySet Name="Monitor" EntityType="Self.Monitor" />
+    <EntitySet Name="Reserva" EntityType="Self.Reserva" />
+    <EntitySet Name="Sala" EntityType="Self.Sala" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK__Actividad__Monit__300424B4" Association="Self.FK__Actividad__Monit__300424B4">
+      <End Role="Monitor" EntitySet="Monitor" />
+      <End Role="Actividad" EntitySet="Actividad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Actividad__SalaI__2F10007B" Association="Self.FK__Actividad__SalaI__2F10007B">
+      <End Role="Sala" EntitySet="Sala" />
+      <End Role="Actividad" EntitySet="Actividad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ListaEspe__Activ__38996AB5" Association="Self.FK__ListaEspe__Activ__38996AB5">
+      <End Role="Actividad" EntitySet="Actividad" />
+      <End Role="ListaEspera" EntitySet="ListaEspera" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__Activid__34C8D9D1" Association="Self.FK__Reserva__Activid__34C8D9D1">
+      <End Role="Actividad" EntitySet="Actividad" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cliente__Usuario__29572725" Association="Self.FK__Cliente__Usuario__29572725">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ListaEspe__Clien__37A5467C" Association="Self.FK__ListaEspe__Clien__37A5467C">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="ListaEspera" EntitySet="ListaEspera" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__Cliente__33D4B598" Association="Self.FK__Reserva__Cliente__33D4B598">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Monitor__Usuario__267ABA7A" Association="Self.FK__Monitor__Usuario__267ABA7A">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Monitor" EntitySet="Monitor" />
+    </AssociationSet>
+    <FunctionImport Name="sp_DeleteActividad">
+      <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteCliente">
+      <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteListaEspera">
+      <Parameter Name="ListaEsperaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteMonitor">
+      <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteReserva">
+      <Parameter Name="ReservaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteSala">
+      <Parameter Name="SalaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteUsuario">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetActividades" ReturnType="Collection(GenteFitCristinaModel.sp_GetActividades_Result)" />
+    <FunctionImport Name="sp_GetClientes" ReturnType="Collection(GenteFitCristinaModel.sp_GetClientes_Result)" />
+    <FunctionImport Name="sp_GetListaEsperaByActividad" ReturnType="Collection(GenteFitCristinaModel.sp_GetListaEsperaByActividad_Result)">
+      <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetMonitores" ReturnType="Collection(GenteFitCristinaModel.sp_GetMonitores_Result)" />
+    <FunctionImport Name="sp_GetReservas" ReturnType="Collection(GenteFitCristinaModel.sp_GetReservas_Result)" />
+    <FunctionImport Name="sp_GetSalas" ReturnType="Collection(GenteFitCristinaModel.sp_GetSalas_Result)" />
+    <FunctionImport Name="sp_GetUsuarios" ReturnType="Collection(GenteFitCristinaModel.sp_GetUsuarios_Result)" />
+    <FunctionImport Name="sp_InsertActividad">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Intensidad" Mode="In" Type="String" />
+      <Parameter Name="PlazasTotales" Mode="In" Type="Int32" />
+      <Parameter Name="Horario" Mode="In" Type="DateTime" />
+      <Parameter Name="SalaID" Mode="In" Type="Int32" />
+      <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertCliente">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Apellidos" Mode="In" Type="String" />
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="Direccion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertListaEspera">
+      <Parameter Name="Posicion" Mode="In" Type="Int32" />
+      <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+      <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertMonitor">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Apellidos" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="Correo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertReserva">
+      <Parameter Name="FechaReserva" Mode="In" Type="DateTime" />
+      <Parameter Name="EstadoReserva" Mode="In" Type="String" />
+      <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+      <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertSala">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Capacidad" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertUsuario">
+      <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+      <Parameter Name="Contraseña" Mode="In" Type="String" />
+      <Parameter Name="Rol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateActividad">
+      <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Intensidad" Mode="In" Type="String" />
+      <Parameter Name="PlazasTotales" Mode="In" Type="Int32" />
+      <Parameter Name="Horario" Mode="In" Type="DateTime" />
+      <Parameter Name="SalaID" Mode="In" Type="Int32" />
+      <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateCliente">
+      <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Apellidos" Mode="In" Type="String" />
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="Direccion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateListaEsperaPosicion">
+      <Parameter Name="ListaEsperaID" Mode="In" Type="Int32" />
+      <Parameter Name="Posicion" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateMonitor">
+      <Parameter Name="MonitorID" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Apellidos" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="Correo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateReserva">
+      <Parameter Name="ReservaID" Mode="In" Type="Int32" />
+      <Parameter Name="FechaReserva" Mode="In" Type="DateTime" />
+      <Parameter Name="EstadoReserva" Mode="In" Type="String" />
+      <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+      <Parameter Name="ActividadID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateSala">
+      <Parameter Name="SalaID" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Capacidad" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateUsuario">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+      <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+      <Parameter Name="Contraseña" Mode="In" Type="String" />
+      <Parameter Name="Rol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_EliminarCliente">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertUsuarioConCliente">
+      <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+      <Parameter Name="Contraseña" Mode="In" Type="String" />
+      <Parameter Name="Rol" Mode="In" Type="String" />
+      <Parameter Name="NombreCliente" Mode="In" Type="String" />
+      <Parameter Name="ApellidosCliente" Mode="In" Type="String" />
+      <Parameter Name="CorreoCliente" Mode="In" Type="String" />
+      <Parameter Name="TelefonoCliente" Mode="In" Type="String" />
+      <Parameter Name="FechaNacimientoCliente" Mode="In" Type="DateTime" />
+      <Parameter Name="DireccionCliente" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_GetActividades_Result">
+    <Property Type="Int32" Name="ActividadID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Intensidad" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="PlazasTotales" Nullable="false" />
+    <Property Type="DateTime" Name="Horario" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="SalaID" Nullable="true" />
+    <Property Type="Int32" Name="MonitorID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetClientes_Result">
+    <Property Type="Int32" Name="ClienteID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+    <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+    <Property Type="String" Name="Direccion" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetListaEsperaByActividad_Result">
+    <Property Type="Int32" Name="ListaEsperaID" Nullable="false" />
+    <Property Type="Int32" Name="Posicion" Nullable="false" />
+    <Property Type="Int32" Name="ClienteID" Nullable="true" />
+    <Property Type="Int32" Name="ActividadID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetMonitores_Result">
+    <Property Type="Int32" Name="MonitorID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Correo" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetReservas_Result">
+    <Property Type="Int32" Name="ReservaID" Nullable="false" />
+    <Property Type="DateTime" Name="FechaReserva" Nullable="false" Precision="23" />
+    <Property Type="String" Name="EstadoReserva" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="ClienteID" Nullable="true" />
+    <Property Type="Int32" Name="ActividadID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetSalas_Result">
+    <Property Type="Int32" Name="SalaID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="Capacidad" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetUsuarios_Result">
+    <Property Type="Int32" Name="UsuarioID" Nullable="false" />
+    <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Contraseña" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Rol" Nullable="false" MaxLength="20" />
+  </ComplexType>
+</Schema>

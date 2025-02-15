@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GenteFitCristinaModelStoreContainer" CdmEntityContainer="GenteFitCristinaEntities1">
+    <EntitySetMapping Name="Actividad">
+      <EntityTypeMapping TypeName="GenteFitCristinaModel.Actividad">
+        <MappingFragment StoreEntitySet="Actividad">
+          <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Intensidad" ColumnName="Intensidad" />
+          <ScalarProperty Name="PlazasTotales" ColumnName="PlazasTotales" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+          <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="GenteFitCristinaModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListaEspera">
+      <EntityTypeMapping TypeName="GenteFitCristinaModel.ListaEspera">
+        <MappingFragment StoreEntitySet="ListaEspera">
+          <ScalarProperty Name="ListaEsperaID" ColumnName="ListaEsperaID" />
+          <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Monitor">
+      <EntityTypeMapping TypeName="GenteFitCristinaModel.Monitor">
+        <MappingFragment StoreEntitySet="Monitor">
+          <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reserva">
+      <EntityTypeMapping TypeName="GenteFitCristinaModel.Reserva">
+        <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+          <ScalarProperty Name="FechaReserva" ColumnName="FechaReserva" />
+          <ScalarProperty Name="EstadoReserva" ColumnName="EstadoReserva" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sala">
+      <EntityTypeMapping TypeName="GenteFitCristinaModel.Sala">
+        <MappingFragment StoreEntitySet="Sala">
+          <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="GenteFitCristinaModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_DeleteActividad" FunctionName="GenteFitCristinaModel.Store.sp_DeleteActividad" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteCliente" FunctionName="GenteFitCristinaModel.Store.sp_DeleteCliente" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteListaEspera" FunctionName="GenteFitCristinaModel.Store.sp_DeleteListaEspera" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteMonitor" FunctionName="GenteFitCristinaModel.Store.sp_DeleteMonitor" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteReserva" FunctionName="GenteFitCristinaModel.Store.sp_DeleteReserva" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteSala" FunctionName="GenteFitCristinaModel.Store.sp_DeleteSala" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteUsuario" FunctionName="GenteFitCristinaModel.Store.sp_DeleteUsuario" />
+    <FunctionImportMapping FunctionImportName="sp_GetActividades" FunctionName="GenteFitCristinaModel.Store.sp_GetActividades">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetActividades_Result">
+          <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Intensidad" ColumnName="Intensidad" />
+          <ScalarProperty Name="PlazasTotales" ColumnName="PlazasTotales" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+          <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetClientes" FunctionName="GenteFitCristinaModel.Store.sp_GetClientes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetClientes_Result">
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetListaEsperaByActividad" FunctionName="GenteFitCristinaModel.Store.sp_GetListaEsperaByActividad">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetListaEsperaByActividad_Result">
+          <ScalarProperty Name="ListaEsperaID" ColumnName="ListaEsperaID" />
+          <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetMonitores" FunctionName="GenteFitCristinaModel.Store.sp_GetMonitores">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetMonitores_Result">
+          <ScalarProperty Name="MonitorID" ColumnName="MonitorID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReservas" FunctionName="GenteFitCristinaModel.Store.sp_GetReservas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetReservas_Result">
+          <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+          <ScalarProperty Name="FechaReserva" ColumnName="FechaReserva" />
+          <ScalarProperty Name="EstadoReserva" ColumnName="EstadoReserva" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="ActividadID" ColumnName="ActividadID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetSalas" FunctionName="GenteFitCristinaModel.Store.sp_GetSalas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetSalas_Result">
+          <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetUsuarios" FunctionName="GenteFitCristinaModel.Store.sp_GetUsuarios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GenteFitCristinaModel.sp_GetUsuarios_Result">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_InsertActividad" FunctionName="GenteFitCristinaModel.Store.sp_InsertActividad" />
+    <FunctionImportMapping FunctionImportName="sp_InsertCliente" FunctionName="GenteFitCristinaModel.Store.sp_InsertCliente" />
+    <FunctionImportMapping FunctionImportName="sp_InsertListaEspera" FunctionName="GenteFitCristinaModel.Store.sp_InsertListaEspera" />
+    <FunctionImportMapping FunctionImportName="sp_InsertMonitor" FunctionName="GenteFitCristinaModel.Store.sp_InsertMonitor" />
+    <FunctionImportMapping FunctionImportName="sp_InsertReserva" FunctionName="GenteFitCristinaModel.Store.sp_InsertReserva" />
+    <FunctionImportMapping FunctionImportName="sp_InsertSala" FunctionName="GenteFitCristinaModel.Store.sp_InsertSala" />
+    <FunctionImportMapping FunctionImportName="sp_InsertUsuario" FunctionName="GenteFitCristinaModel.Store.sp_InsertUsuario" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateActividad" FunctionName="GenteFitCristinaModel.Store.sp_UpdateActividad" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateCliente" FunctionName="GenteFitCristinaModel.Store.sp_UpdateCliente" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateListaEsperaPosicion" FunctionName="GenteFitCristinaModel.Store.sp_UpdateListaEsperaPosicion" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateMonitor" FunctionName="GenteFitCristinaModel.Store.sp_UpdateMonitor" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateReserva" FunctionName="GenteFitCristinaModel.Store.sp_UpdateReserva" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateSala" FunctionName="GenteFitCristinaModel.Store.sp_UpdateSala" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateUsuario" FunctionName="GenteFitCristinaModel.Store.sp_UpdateUsuario" />
+    <FunctionImportMapping FunctionImportName="sp_EliminarCliente" FunctionName="GenteFitCristinaModel.Store.sp_EliminarCliente" />
+    <FunctionImportMapping FunctionImportName="sp_InsertUsuarioConCliente" FunctionName="GenteFitCristinaModel.Store.sp_InsertUsuarioConCliente" />
+  </EntityContainerMapping>
+</Mapping>
